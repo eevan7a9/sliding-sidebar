@@ -1,18 +1,36 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <main>
+    <CalendarUi greeting="Hello thre" />
+    <ConverterUi />
+  </main>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import CalendarUi from "../components/CalendarUi";
+import ConverterUi from "../components/ConverterUi";
 export default {
-  name: 'home',
+  name: "home",
   components: {
-    HelloWorld
+    CalendarUi,
+    ConverterUi
+  },
+  data() {
+    return {
+      greeting: "Hello Humans"
+    };
   }
-}
+};
 </script>
+<style scoped>
+main {
+  display: flex;
+  width: 100%;
+}
+CalendarUi {
+  width: 50%;
+}
+ConverterUi {
+  width: 50%;
+}
+</style>
