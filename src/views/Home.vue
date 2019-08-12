@@ -1,6 +1,6 @@
 <template>
   <main>
-    <CalendarUi greeting="Hello thre" />
+    <CalendarUi :greetings="greeting" :dates="dates" />
     <ConverterUi />
   </main>
 </template>
@@ -9,6 +9,7 @@
 // @ is an alias to /src
 import CalendarUi from "../components/CalendarUi";
 import ConverterUi from "../components/ConverterUi";
+
 export default {
   name: "home",
   components: {
@@ -17,8 +18,16 @@ export default {
   },
   data() {
     return {
-      greeting: "Hello Humans"
+      greeting: "Hello Humans",
+      dates: []
     };
+  },
+  mounted() {
+    const limit = 43;
+    for (let i = 1; i < limit; i++) {
+      const element = i;
+      this.dates.push(element);
+    }
   }
 };
 </script>
