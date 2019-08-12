@@ -11,7 +11,12 @@
           </div>
         </div>
         <div class="dates">
-          <div class="date-day" v-for="(date, index) in dates" :key="index">
+          <div
+            class="date-day"
+            v-for="(date, index) in dates"
+            :key="index"
+            v-bind:class="{'date-today':dayToday(date)}"
+          >
             <span>{{date}}</span>
           </div>
         </div>
@@ -24,17 +29,52 @@
 export default {
   name: "CalendarUi",
   props: {
-    greetings: String,
-    dates: Array
+    greetings: String
   },
   data() {
     return {
       calendar_header: "2019, 08, 12",
-      days: ["S", "M", "T", "W", "T", "F", "S"]
+      days: ["S", "M", "T", "W", "T", "F", "S"],
+      dates: [],
+      date_full: new Date(),
+      today: new Date().getDate()
     };
   },
   methods: {
-    getTotal() {}
+    dayToday(date) {
+      return new Date().getDate() == date;
+    },
+    getLastDate(year, month) {
+      return new Date(year, month + 1, 0).getDate();
+    },
+    getFirstDay(year, month) {
+      return new Date(year, month, 1).getDay();
+    },
+    initCalendar() {
+      const first_day = this.getFirstDay(
+        this.date_full.getFullYear(),
+        this.date_full.getMonth()
+      );
+      const date_end = this.getLastDate(
+        this.date_full.getFullYear(),
+        this.date_full.getMonth()
+      );
+      let date_start = 1;
+      const limit = 43;
+      for (let i = 1; i < limit; i++) {
+        if (i <= first_day) {
+          this.dates.push(" ");
+        } else if (date_end < date_start) {
+          this.dates.push(" ");
+        } else {
+          this.dates.push(`${date_start}`);
+          date_start++;
+        }
+      }
+    }
+  },
+  mounted() {
+    this.initCalendar();
   }
 };
 </script>
@@ -49,7 +89,6 @@ export default {
   display: flex;
 }
 .calendar {
-  height: 100%;
   width: 100%;
   background: whitesmoke;
 }
@@ -61,7 +100,6 @@ export default {
 .calendar-body {
   border: #333 solid 1px;
   width: 100%;
-  height: 550px;
 }
 .weeks {
   height: 50px;
@@ -84,14 +122,17 @@ export default {
   flex-wrap: wrap;
 }
 .date-day {
-  background: cadetblue;
   width: 14.285714285714286%;
   height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
-
+.date-today {
+  background: rgb(221, 196, 196);
+  border-radius: 100%;
+}
 .active {
   color: red;
 }

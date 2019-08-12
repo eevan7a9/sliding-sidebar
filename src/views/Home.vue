@@ -1,6 +1,6 @@
 <template>
   <main>
-    <CalendarUi :greetings="greeting" :dates="dates" />
+    <CalendarUi :greetings="greeting" />
     <ConverterUi />
   </main>
 </template>
@@ -18,16 +18,8 @@ export default {
   },
   data() {
     return {
-      greeting: "Hello Humans",
-      dates: []
+      greeting: "Hello Humans"
     };
-  },
-  mounted() {
-    const limit = 43;
-    for (let i = 1; i < limit; i++) {
-      const element = i;
-      this.dates.push(element);
-    }
   }
 };
 </script>
