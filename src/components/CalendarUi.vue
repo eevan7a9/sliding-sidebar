@@ -2,7 +2,8 @@
   <div class="calendar-container">
     <div class="calendar">
       <section class="calendar-head">
-        <h1>Header</h1>
+        <button @click="decreaseMonth">Prev</button>
+        <button @click="increaseMonth">Next</button>
       </section>
       <section class="calendar-body">
         <div class="weeks">
@@ -13,7 +14,7 @@
         <div class="dates">
           <div
             class="date-day"
-            v-for="(date, index) in dates"
+            v-for="(date, index) in dates_days"
             :key="index"
             v-bind:class="{'date-today':dayToday(date)}"
           >
@@ -35,8 +36,12 @@ export default {
     return {
       calendar_header: "2019, 08, 12",
       days: ["S", "M", "T", "W", "T", "F", "S"],
-      dates: [],
-      date_full: new Date(),
+      dates_days: [],
+      dates: {
+        year: new Date().getFullYear(),
+        month: new Date().getMonth(),
+        date: new Date().getDate()
+      },
       today: new Date().getDate()
     };
   },
@@ -51,26 +56,38 @@ export default {
       return new Date(year, month, 1).getDay();
     },
     initCalendar() {
-      const first_day = this.getFirstDay(
-        this.date_full.getFullYear(),
-        this.date_full.getMonth()
-      );
-      const date_end = this.getLastDate(
-        this.date_full.getFullYear(),
-        this.date_full.getMonth()
-      );
+      const first_day = this.getFirstDay(this.dates.year, this.dates.month);
+      const date_end = this.getLastDate(this.dates.year, this.dates.month);
       let date_start = 1;
       const limit = 43;
       for (let i = 1; i < limit; i++) {
         if (i <= first_day) {
-          this.dates.push(" ");
+          this.dates_days.push(" ");
         } else if (date_end < date_start) {
-          this.dates.push(" ");
+          this.dates_days.push(" ");
         } else {
-          this.dates.push(`${date_start}`);
+          this.dates_days.push(`${date_start}`);
           date_start++;
         }
       }
+    },
+    increaseMonth() {
+      this.dates.month += 1;
+      if (this.dates.month > 11) {
+        this.dates.month = 0;
+      }
+      this.dates_days = [];
+      this.initCalendar();
+      console.log(this.dates.month);
+    },
+    decreaseMonth() {
+      this.dates.month -= 1;
+      if (this.dates.month < 0) {
+        this.dates.month = 12;
+      }
+      this.dates_days = [];
+      this.initCalendar();
+      console.log(this.dates.month);
     }
   },
   mounted() {
