@@ -19,7 +19,9 @@
             :key="index"
             v-bind:class="{'date-today':dayToday(date)}"
           >
-            <span>{{date}}</span>
+            <span
+              @click="$emit('set-date', {year:dates.year, month:dates.month, date:setNewDate(date)})"
+            >{{date}}</span>
           </div>
         </div>
       </section>
@@ -43,13 +45,13 @@ export default {
         year: this.date.getFullYear(),
         month: this.date.getMonth(),
         date: this.date.getDate()
-      },
-      today: new Date().getDate()
+      }
+      // today: new Date().getDate()
     };
   },
   methods: {
     dayToday(date) {
-      return new Date().getDate() == date;
+      return this.dates.date == date;
     },
     getLastDate(year, month) {
       return new Date(year, month + 1, 0).getDate();
@@ -100,6 +102,12 @@ export default {
       this.dates_days = [];
       this.initCalendar();
       // console.log(this.dates.month);
+    },
+    setNewDate(new_date) {
+      this.dates_days = [];
+      this.dates.date = new_date;
+      this.initCalendar();
+      return new_date;
     }
   },
   mounted() {
@@ -191,7 +199,7 @@ export default {
   );
 }
 .date-day span:hover {
-  background: rgb(255, 248, 248);
+  background: white;
   border-radius: 100%;
   width: 50px;
   height: 50px;
@@ -200,11 +208,8 @@ export default {
   align-items: center;
 }
 .date-today span {
-  background-image: radial-gradient(
-    circle 801px at 10.1% 20.1%,
-    rgba(209, 234, 205, 1) 5.3%,
-    rgba(159, 219, 233, 1) 90%
-  );
+  background: #2b2121;
+  color: whitesmoke;
   border-radius: 100%;
   width: 50px;
   height: 50px;

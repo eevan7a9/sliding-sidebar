@@ -1,6 +1,7 @@
 <template>
   <main>
-    <CalendarUi :date="date" />
+    <div>{{ date.getFullYear()+ " " + date.getMonth() + " " + date.getDate() }}</div>
+    <CalendarUi :date="date" v-on:set-date="updateDate" />
     <ConverterUi />
   </main>
 </template>
@@ -23,8 +24,12 @@ export default {
     };
   },
   methods: {
-    increaseMonth() {
-      this.dates.month = 11;
+    updateDate(changed_date) {
+      this.date = new Date(
+        changed_date.year,
+        changed_date.month,
+        changed_date.date
+      );
     }
   }
 };
