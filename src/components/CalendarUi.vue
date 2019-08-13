@@ -3,6 +3,7 @@
     <div class="calendar">
       <section class="calendar-head">
         <button @click="decreaseMonth">Prev</button>
+        <h1>{{dates.year}} {{getMonthLongName()}}</h1>
         <button @click="increaseMonth">Next</button>
       </section>
       <section class="calendar-body">
@@ -71,23 +72,33 @@ export default {
         }
       }
     },
+    getMonthLongName() {
+      const the_date = new Date(
+        this.dates.year,
+        this.dates.month,
+        this.dates.date
+      );
+      return the_date.toLocaleString("default", { month: "long" });
+    },
     increaseMonth() {
       this.dates.month += 1;
       if (this.dates.month > 11) {
+        this.dates.year += 1;
         this.dates.month = 0;
       }
       this.dates_days = [];
       this.initCalendar();
-      console.log(this.dates.month);
+      // console.log(this.dates.month);
     },
     decreaseMonth() {
       this.dates.month -= 1;
       if (this.dates.month < 0) {
-        this.dates.month = 12;
+        this.dates.year -= 1;
+        this.dates.month = 11;
       }
       this.dates_days = [];
       this.initCalendar();
-      console.log(this.dates.month);
+      // console.log(this.dates.month);
     }
   },
   mounted() {
@@ -113,6 +124,12 @@ export default {
   height: 50px;
   width: 100%;
   border: #333 solid 1px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.calendar-head button {
+  height: 100%;
 }
 .calendar-body {
   border: #333 solid 1px;
@@ -137,6 +154,7 @@ export default {
 .dates {
   display: flex;
   flex-wrap: wrap;
+  padding-top: 50px;
 }
 .date-day {
   width: 14.285714285714286%;
