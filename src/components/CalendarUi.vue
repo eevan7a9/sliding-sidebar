@@ -89,6 +89,11 @@ export default {
         this.dates.year += 1;
         this.dates.month = 0;
       }
+      this.$emit("set-date", {
+        year: this.dates.year,
+        month: this.dates.month,
+        date: this.dates.date
+      });
       this.dates_days = [];
       this.initCalendar();
       // console.log(this.dates.month);
@@ -99,7 +104,13 @@ export default {
         this.dates.year -= 1;
         this.dates.month = 11;
       }
+      this.$emit("set-date", {
+        year: this.dates.year,
+        month: this.dates.month,
+        date: this.dates.date
+      });
       this.dates_days = [];
+
       this.initCalendar();
       // console.log(this.dates.month);
     },
