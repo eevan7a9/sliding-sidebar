@@ -1,6 +1,6 @@
 <template>
   <main>
-    <CalendarUi :greetings="greeting" />
+    <CalendarUi :date="date" />
     <ConverterUi />
   </main>
 </template>
@@ -18,8 +18,14 @@ export default {
   },
   data() {
     return {
-      greeting: "Hello Humans"
+      greeting: "Hello Humans",
+      date: new Date()
     };
+  },
+  methods: {
+    increaseMonth() {
+      this.dates.month = 11;
+    }
   }
 };
 </script>

@@ -2,9 +2,9 @@
   <div class="calendar-container">
     <div class="calendar">
       <section class="calendar-head">
-        <button @click="decreaseMonth">Prev</button>
+        <h2 @click="decreaseMonth">&lt;&lt;</h2>
         <h1>{{dates.year}} {{getMonthLongName()}}</h1>
-        <button @click="increaseMonth">Next</button>
+        <h2 @click="increaseMonth">&gt;&gt;</h2>
       </section>
       <section class="calendar-body">
         <div class="weeks">
@@ -31,7 +31,8 @@
 export default {
   name: "CalendarUi",
   props: {
-    greetings: String
+    greetings: String,
+    date: Date
   },
   data() {
     return {
@@ -39,9 +40,9 @@ export default {
       days: ["S", "M", "T", "W", "T", "F", "S"],
       dates_days: [],
       dates: {
-        year: new Date().getFullYear(),
-        month: new Date().getMonth(),
-        date: new Date().getDate()
+        year: this.date.getFullYear(),
+        month: this.date.getMonth(),
+        date: this.date.getDate()
       },
       today: new Date().getDate()
     };
@@ -112,44 +113,58 @@ export default {
   width: 100%;
   border: 2px solid #333;
   padding: 25px;
-  height: 650px;
-  background: wheat;
+  height: 600px;
+  background-image: radial-gradient(
+    circle 801px at 10.1% 20.1%,
+    rgba(209, 234, 205, 1) 5.3%,
+    rgba(159, 219, 233, 1) 90%
+  );
   display: flex;
 }
 .calendar {
   width: 100%;
-  background: whitesmoke;
 }
 .calendar-head {
   height: 50px;
   width: 100%;
-  border: #333 solid 1px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-image: radial-gradient(
+    circle 801px at 10.1% 20.1%,
+    rgba(209, 234, 205, 1) 5.3%,
+    rgba(159, 219, 233, 1) 90%
+  );
 }
-.calendar-head button {
+.calendar-head h2 {
+  cursor: pointer;
   height: 100%;
+  width: 100px;
+  font-size: 28px;
+  font-weight: 900;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .calendar-body {
-  border: #333 solid 1px;
   width: 100%;
 }
 .weeks {
   height: 50px;
-  border: #333 solid 1px;
   display: flex;
   flex-wrap: wrap;
+  border-left: white solid 1px;
 }
 .weeks div {
   height: 100%;
   font-size: 20px;
   font-weight: 900;
-  background: cadetblue;
   flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-right: white solid 1px;
 }
 .dates {
   display: flex;
@@ -159,15 +174,45 @@ export default {
 .date-day {
   width: 14.285714285714286%;
   height: 50px;
+  font-weight: 900;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  color: rgb(75, 75, 75);
+  border: white solid 1px;
+  background-image: radial-gradient(
+    circle 328px at 2.9% 15%,
+    rgba(191, 224, 251, 1) 0%,
+    rgba(232, 233, 251, 1) 25.8%,
+    rgba(252, 239, 250, 1) 50.8%,
+    rgba(234, 251, 251, 1) 77.6%,
+    rgba(240, 251, 244, 1) 100.7%
+  );
 }
-.date-today {
-  background: rgb(221, 196, 196);
+.date-day span:hover {
+  background: rgb(255, 248, 248);
   border-radius: 100%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+.date-today span {
+  background-image: radial-gradient(
+    circle 801px at 10.1% 20.1%,
+    rgba(209, 234, 205, 1) 5.3%,
+    rgba(159, 219, 233, 1) 90%
+  );
+  border-radius: 100%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .active {
   color: red;
 }
