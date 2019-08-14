@@ -6,17 +6,17 @@
     </section>
     <section class="convert-from">
       <label for="from">From :</label>
-      <select name="from_country">
+      <select v-model="convert_from">
         <option selected>USD</option>
-        <option value="php">Php</option>
+        <option v-for="(currency, index) in currencies" :key="index">{{currency}}</option>
       </select>
       <input type="number" id="from_amount" placeholder="Amount" />
     </section>
     <section class="convert-to">
       <label for="to">To :</label>
-      <select name="to_country" id="to_country">
-        <option value="php">Php</option>
-        <option value="usd">Usd</option>
+      <select v-model="convert_to">
+        <option selected>PHP</option>
+        <option v-for="(currency, index) in currencies" :key="index">{{currency}}</option>
       </select>
       <input type="text" id="to_amount" readonly placeholder="Result" />
     </section>
@@ -34,7 +34,43 @@ export default {
   },
   data() {
     return {
-      header: "Converter Here"
+      header: "Converter Here",
+      convert_from: "USD",
+      convert_to: "PHP",
+      currencies: [
+        "USD",
+        "EUR",
+        "AUD",
+        "BRL",
+        "BGN",
+        "CAD",
+        "CHF",
+        "CNY",
+        "CZK",
+        "DKK",
+        "GBP",
+        "HRK",
+        "HKD",
+        "IDR",
+        "ILS",
+        "INR",
+        "ISK",
+        "JPY",
+        "KRW",
+        "MXN",
+        "MYR",
+        "MXV",
+        "NOK",
+        "NZD",
+        "PLN",
+        "PHP",
+        "RON",
+        "RUB",
+        "SEK",
+        "SGD",
+        "THB",
+        "ZAR"
+      ]
     };
   },
   methods: {
@@ -77,5 +113,12 @@ section label {
   width: 100px;
   text-align: right;
   margin-right: 10px;
+}
+.title {
+  display: flex;
+  flex-direction: column;
+}
+.title p {
+  padding: 20px 0;
 }
 </style>
