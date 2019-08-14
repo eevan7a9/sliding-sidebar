@@ -2,7 +2,7 @@
   <main>
     <div>{{ date.getFullYear()+ " " + date.getMonth() + " " + date.getDate() }}</div>
     <CalendarUi :date="date" v-on:set-date="updateDate" />
-    <ConverterUi />
+    <ConverterUi :date="date" />
   </main>
 </template>
 
