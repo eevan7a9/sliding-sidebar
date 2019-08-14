@@ -1,8 +1,8 @@
 <template>
   <div id="app" class="container">
     <div id="nav">
-      <router-link to="/">Home</router-link>|
-      <router-link to="/about">About</router-link>
+      <router-link to="/" class="nav-item">Home</router-link>|
+      <router-link to="/about" class="nav-item">About</router-link>
     </div>
     <router-view />
   </div>
@@ -13,12 +13,23 @@
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   height: 900px;
+}
+#nav {
+  background: #2c3e50;
+  width: 100%;
+  display: flex;
+}
+.nav-item {
+  color: wheat;
+  padding: 20px;
+  font-size: 20px;
+  font-weight: 900;
+  text-decoration: none;
 }
 
 @import "./assets/style.css";

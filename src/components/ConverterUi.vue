@@ -2,7 +2,7 @@
   <main>
     <section class="title">
       <h1>Currency Exchange</h1>
-      <p>With this free application you can compare currencies with others</p>
+      <p>With this free application you can compare your currency with other currencies</p>
     </section>
     <section class="convert-from">
       <label for="from">From :</label>
@@ -103,10 +103,9 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css?family=Indie+Flower&display=swap");
 main {
   width: 100%;
-  border: 1px solid rgb(122, 121, 121);
-  border-left: 0px;
   padding: 10px;
   height: 600px;
   display: flex;
@@ -158,6 +157,9 @@ section label {
 }
 .title p {
   padding: 20px 0;
+  font-family: "Indie Flower", cursive;
+  font-size: 18px;
+  font-weight: 600;
 }
 .error {
   border: #fb3d3d solid 2px;

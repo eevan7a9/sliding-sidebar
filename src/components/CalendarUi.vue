@@ -25,6 +25,9 @@
           </div>
         </div>
       </section>
+      <p class="tips">
+        <i>*You can select specific Date to get the exchange rate at that time.</i>
+      </p>
     </div>
   </div>
 </template>
@@ -218,7 +221,9 @@ export default {
   justify-content: center;
   align-items: center;
 }
-
+.tips {
+  margin-top: 10px;
+}
 .active {
   color: red;
 }
