@@ -18,10 +18,10 @@
         <option selected>PHP</option>
         <option v-for="(currency, index) in currencies" :key="index">{{currency}}</option>
       </select>
-      <input type="text" id="to_amount" readonly placeholder="Result" />
+      <input type="text" id="to_amount" readonly placeholder="Result" v-model="result" />
     </section>
     <section class="convert-submit">
-      <button @click="showSomething">Convert</button>
+      <button @click="getResult">Convert</button>
     </section>
   </main>
 </template>
@@ -37,6 +37,7 @@ export default {
       header: "Converter Here",
       convert_from: "USD",
       convert_to: "PHP",
+      result: null,
       currencies: [
         "USD",
         "EUR",
@@ -74,8 +75,18 @@ export default {
     };
   },
   methods: {
-    showSomething() {
-      console.log("hello World");
+    getResult() {
+      const year = this.date.getFullYear();
+      const month = this.date.getMonth() + 1;
+      const date = this.date.getDate();
+      fetch(
+        `https://api.ratesapi.io/api/${year}-${month}-${date}?base=${this.convert_from}&symbols=${this.convert_to}`
+      )
+        .then(response => response.json())
+        .then(data => {
+          console.log(Object.values(data.rates)[0]);
+          this.result = Object.values(data.rates)[0];
+        });
     }
   }
   // https://api.ratesapi.io/api/2019-07-12?base=USD&symbols=PHP
