@@ -1,8 +1,8 @@
 <template>
   <main>
     <section class="title">
-      <h1>Convert Currency</h1>
-      <p>{{date}}</p>
+      <h1>Currency Exchange</h1>
+      <p>With this free application you can compare currencies with others</p>
     </section>
     <section class="convert-from">
       <label for="from">From :</label>
@@ -10,7 +10,12 @@
         <option selected>USD</option>
         <option v-for="(currency, index) in currencies" :key="index">{{currency}}</option>
       </select>
-      <input type="number" id="from_amount" placeholder="Amount" />
+      <input
+        type="number"
+        v-model="amount"
+        placeholder="Amount"
+        v-bind:class="{error:amountCheck(amount)}"
+      />
     </section>
     <section class="convert-to">
       <label for="to">To :</label>
@@ -21,7 +26,7 @@
       <input type="text" id="to_amount" readonly placeholder="Result" v-model="result" />
     </section>
     <section class="convert-submit">
-      <button @click="getResult">Convert</button>
+      <button @click="getResult" :disabled="amountCheck(amount)">Convert</button>
     </section>
   </main>
 </template>
@@ -37,6 +42,7 @@ export default {
       header: "Converter Here",
       convert_from: "USD",
       convert_to: "PHP",
+      amount: 1,
       result: null,
       currencies: [
         "USD",
@@ -84,9 +90,12 @@ export default {
       )
         .then(response => response.json())
         .then(data => {
-          console.log(Object.values(data.rates)[0]);
-          this.result = Object.values(data.rates)[0];
+          const currency_rate = Object.values(data.rates)[0];
+          this.result = this.amount * currency_rate.toFixed(2);
         });
+    },
+    amountCheck(amount) {
+      return amount != parseInt(amount) || amount < 1;
     }
   }
   // https://api.ratesapi.io/api/2019-07-12?base=USD&symbols=PHP
@@ -97,9 +106,9 @@ export default {
 main {
   width: 100%;
   border: 1px solid rgb(122, 121, 121);
+  border-left: 0px;
   padding: 10px;
   height: 600px;
-  background: whitesmoke;
   display: flex;
   flex-direction: column;
 }
@@ -109,12 +118,30 @@ section {
   justify-content: center;
   align-items: center;
 }
-
+select,
+button {
+  background-image: radial-gradient(
+    circle 328px at 2.9% 15%,
+    rgba(191, 224, 251, 1) 0%,
+    rgba(232, 233, 251, 1) 25.8%,
+    rgba(252, 239, 250, 1) 50.8%,
+    rgba(234, 251, 251, 1) 77.6%,
+    rgba(240, 251, 244, 1) 100.7%
+  );
+  border: white solid 1px;
+  padding: 0 20px;
+  cursor: pointer;
+}
+button:disabled,
+input:read-only {
+  cursor: not-allowed;
+}
 section select,
 section input,
 section button {
   height: 60px;
   font-size: 20px;
+  text-align: center;
 }
 section input {
   width: 200px;
@@ -131,5 +158,11 @@ section label {
 }
 .title p {
   padding: 20px 0;
+}
+.error {
+  border: #fb3d3d solid 2px;
+  box-shadow: 0px 0px 4px 0.5px #f48080;
+}
+.btn-disable {
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
-  <main>
-    <div>{{ date.getFullYear()+ " " + date.getMonth() + " " + date.getDate() }}</div>
+  <main class="container-main">
     <CalendarUi :date="date" v-on:set-date="updateDate" />
     <ConverterUi :date="date" />
   </main>
@@ -35,7 +34,12 @@ export default {
 };
 </script>
 <style scoped>
-main {
+.container-main {
+  background-image: radial-gradient(
+    circle 801px at 10.1% 20.1%,
+    rgba(209, 234, 205, 1) 5.3%,
+    rgba(159, 219, 233, 1) 90%
+  );
   display: flex;
   width: 100%;
 }

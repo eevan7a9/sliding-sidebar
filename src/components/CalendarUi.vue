@@ -130,14 +130,9 @@ export default {
 <style scoped>
 .calendar-container {
   width: 100%;
-  border: 2px solid #333;
+
   padding: 25px;
   height: 600px;
-  background-image: radial-gradient(
-    circle 801px at 10.1% 20.1%,
-    rgba(209, 234, 205, 1) 5.3%,
-    rgba(159, 219, 233, 1) 90%
-  );
   display: flex;
 }
 .calendar {
@@ -149,11 +144,6 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-image: radial-gradient(
-    circle 801px at 10.1% 20.1%,
-    rgba(209, 234, 205, 1) 5.3%,
-    rgba(159, 219, 233, 1) 90%
-  );
 }
 .calendar-head h2 {
   cursor: pointer;
@@ -219,7 +209,7 @@ export default {
   align-items: center;
 }
 .date-today span {
-  background: #2b2121;
+  background: #62bee8;
   color: whitesmoke;
   border-radius: 100%;
   width: 50px;
