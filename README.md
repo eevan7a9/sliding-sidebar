@@ -1,5 +1,7 @@
 # currency-exchange-with-calendar
 
+With this application you can compare your currency with other currencies
+
 ## Project setup
 ```
 npm install
