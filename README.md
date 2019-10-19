@@ -1,6 +1,6 @@
 # currency-exchange-with-calendar
 
-With this application you can compare your currency with other currencies
+With this application you can compare your currency with other currencies, and it also have a calendar UI that will allow users to view the currency exchange rate from a certain day in the past.
 
 ## Project setup
 ```
